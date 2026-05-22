@@ -1,0 +1,39 @@
+# Stanford40 ResNet 분류 실험 설정 파일입니다.
+# 같은 train.py를 유지한 채 이 YAML만 바꾸면 epoch, batch size, data root 등을 쉽게 실험할 수 있습니다.
+
+# 결과 폴더명과 로그 식별에 사용할 실험 이름
+project_name: resnet_stanford40
+
+# 데이터 split, augmentation 난수, 모델 초기화의 흔들림을 줄이기 위한 seed
+seed: 42
+
+# CUDA있으면 GPU, 없으면 CPU
+device: auto
+
+data:
+  # Kaggle Stanford40 데이터를 직접 내려받아 압축 해제할 기본 경로
+  root: data/stanford40
+  # ResNet 입력 이미지 크기. ImageNet 스타일 기본값인 224를 사용
+  image_size: 224
+  # validation 폴더가 없을 때 train 데이터에서 떼어낼 비율
+  val_ratio: 0.2
+  # DataLoader worker 수
+  num_workers: 4
+
+model:
+  # resnet18 또는 resnet34 중 선택
+  name: resnet18
+
+training:
+  # 전체 데이터셋을 몇 번 반복 학습할지
+  epochs: 10
+  # GPU 메모리가 부족하면 이 값을 먼저 줄임
+  batch_size: 32
+  # optimizer learning rate
+  lr: 0.001
+  # L2 정규화 역할을 하며 overfitting 완화에 도움을 줌
+  weight_decay: 0.0001
+  # train.py에서 adamw와 sgd를 지원
+  optimizer: adamw
+  # history.csv, curves.png, checkpoints가 저장될 위치
+  output_dir: outputs/resnet_stanford40
