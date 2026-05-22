@@ -16,6 +16,10 @@ Custom Dataset, ResNet, training/evaluation loop, checkpoint 저장, 학습 curv
 
 ## Result Preview
 
+10 epoch 학습 기준 validation accuracy는 약 34%로, Stanford40의 40-class 분류 문제에서 무작위 추측보다는 개선되었지만 충분히 높은 성능은 아닙니다.
+
+[Pretrained_ResNet_Stanford40_Classification](https://github.com/hojin-v/Pretrained_ResNet_Stanford40_Classification)프로젝트에서는 pretrained ResNet fine-tuning을 통해 성능 개선을 진행합니다.
+
 | 산출물                                              | 설명                                                  |
 | --------------------------------------------------- | ----------------------------------------------------- |
 | [`history.csv`](assets/results/history.csv)         | epoch별 train/validation loss와 accuracy 기록         |
@@ -165,8 +169,7 @@ python -m src.stanford40_classification.visualize
 
 ## Outputs
 
-학습을 실행하면 결과는 기본적으로 아래 경로에 저장됩니다.  
-이 폴더는 재학습 시 덮어쓰기 또는 append가 발생할 수 있으므로 GitHub에는 올리지 않고, README용 대표 결과는 `assets/results/`에 별도로 보관합니다.
+학습을 실행하면 결과는 기본적으로 아래 경로에 저장됩니다.
 
 ```text
 outputs/resnet_stanford40/
@@ -185,11 +188,3 @@ outputs/resnet_stanford40/
 | `predictions.png` | 실제 행동 class와 예측 행동 class 비교     |
 | `best.pt`         | validation accuracy가 가장 좋은 checkpoint |
 | `last.pt`         | 마지막 epoch checkpoint                    |
-
-README에 표시할 대표 결과를 갱신하려면 학습/시각화가 끝난 뒤 아래 파일만 `assets/results/`로 복사합니다.
-
-```bash
-cp outputs/resnet_stanford40/history.csv assets/results/history.csv
-cp outputs/resnet_stanford40/curves.png assets/results/curves.png
-cp outputs/resnet_stanford40/predictions.png assets/results/predictions.png
-```
